@@ -41,7 +41,7 @@ Components
 
 - Rugged Metal On/Off Switch with Red LED Ring the on/off switch for the handheld (<a href="https://www.amazon.co.uk/gp/product/B017MT6AHI">Example</a>)
 
-- Tactile Switch Buttons 6mm slim <a href="https://www.amazon.co.uk/gp/product/B011OB6M3M">Example</a>)
+- Tactile Switch Buttons 6mm slim (<a href="https://www.amazon.co.uk/gp/product/B011OB6M3M">Example</a>)
 
 - SS22F25-G7 2 Position DPDT 2P2T Panel Mount Mini Slide Switch the on/off switch for the internal speaker (<a href="https://www.amazon.co.uk/gp/product/B008DFYLU4">Example</a>)
 
