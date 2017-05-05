@@ -88,6 +88,9 @@ The complete wiring should look like this (zoom in to see more detail):
 
 <img src="https://rawgithub.com/krotik/spieljunge/pics/wiring.svg" height="300">
 
+test
+<img src="/pics/wiring.svg" height="300">
+
 1. Start off by soldering compo
 
 Software Installation
