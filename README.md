@@ -33,10 +33,6 @@ Components
 
 - Fast Universal Charger Micro USB 5V 2000mA / 2A to provide power and charge the battery (<a href="https://www.amazon.co.uk/gp/product/B01CPIECRQ">Example</a>)
 
-- Raspberry Pi 3 Model B Quad Core CPU 1.2 GHz 1 GB RAM (<a href="https://www.amazon.co.uk/gp/product/B01CCOXV34">Example</a>)
-
-- NTSC/PAL (Television) TFT Display - 3.5" Diagonal (<a href="http://www.exp-tech.de/ntsc-pal-television-tft-display-3-5-diagonal">Example</a>)
-
 - Lithium Ion Battery Pack - 3.7V 4400mAh (<a href="https://www.amazon.co.uk/gp/product/B00PKFJQ0U">Example</a>)
 
 - Solder Finished Prototype PCB for DIY 5x7cm Circuit Board Breadboard to place the buttons on (<a href="https://www.amazon.co.uk/gp/product/B00FXHXT80">Example</a>)
@@ -50,6 +46,10 @@ Components
 - SS22F25-G7 2 Position DPDT 2P2T Panel Mount Mini Slide Switch the on/off switch for the internal speaker (<a href="https://www.amazon.co.uk/gp/product/B008DFYLU4">Example</a>)
 
 ### Electronic components
+
+- Raspberry Pi 3 Model B Quad Core CPU 1.2 GHz 1 GB RAM (<a href="https://www.amazon.co.uk/gp/product/B01CCOXV34">Example</a>)
+
+- NTSC/PAL (Television) TFT Display - 3.5" Diagonal (<a href="http://www.exp-tech.de/ntsc-pal-television-tft-display-3-5-diagonal">Example</a>)
 
 - LM2577 Boost Step Up Module Voltage Regulator 3.5-30V To 4-30V DC Converter to supply the display with 6V power (<a href="https://www.amazon.co.uk/gp/product/B00HLZNS0Q">Example</a>)
 
@@ -84,7 +84,11 @@ used to print the case can be found <a href="/gcode">here</a> (note: these are s
 
 ### Internal wiring
 
-... TODO ...
+The complete wiring should look like this (zoom in to see more detail):
+
+<img src="https://rawgithub.com/krotik/spieljunge/pics/wiring.svg" height="300">
+
+1. Start off by soldering compo
 
 Software Installation
 ---------------------
