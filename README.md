@@ -72,6 +72,9 @@ Components
 
 Construction
 ------------
+The actual construction was a lot of trial and error. You might need to print the case several times to see what is the best fit.
+
+<img src="/pics/spieljunge_012.jpg" height="300"> <img src="/pics/spieljunge_014.jpg" height="300">
 
 ### 3D Printing the Case and Buttons
 The case for Spieljunge was printed using a Prusa3D MK2 printer with PLA filament. The modeling was done in Blender3D - 
@@ -82,16 +85,47 @@ the source file of the model can be found here: <a href="src/sj_model.blend">Mod
 The STL file containing the 3D model for the case can be found <a href="/stl">here</a>. The printable gcode which was 
 used to print the case can be found <a href="/gcode">here</a> (note: these are specific to the used 3D printer). 
 
+### Building the buttons
+
+Use the Breadboard to fit the Tactile Switch Buttons under the printed buttons.
+
+<img src="/pics/spieljunge_017.jpg" height="300"> <img src="/pics/spieljunge_016.jpg" height="300">
+
+Again this is a lot of trial and error until it fits. The Tactile Switch Buttons are then connected to the with the GPIO ports on the PI (I soldered the wires on the Breadboard and used normal PC jumpers for the Pi's GPIO). Each Switch is connected to a GPIO port and ground.
+
+<img src="/pics/spieljunge_023.jpg" height="300"> <img src="/pics/spieljunge_024.jpg" height="300">
+
 ### Internal wiring
 
 The complete wiring should look like this (zoom in to see more detail):
 
-<img src="https://rawgithub.com/krotik/spieljunge/pics/wiring.svg" height="300">
+<a href="/pics/wiring.svg"><img src="/pics/wiring_thumbnail.jpg" height="300"></a>
 
-test
-<img src="/pics/wiring.svg" height="300">
+1. Start off by soldering the composite out and the audio to the Raspberry Pi.
+```
+PP6  = Ground
+PP24 = Video
+PP25 = Left audio
+PP26 = Right audio
+```
+<a href="/pics/wiring.svg"><img src="/pics/pi_back_solder_points.jpg" height="300"></a>
 
-1. Start off by soldering compo
+2. Connect now the Power to the Pi using GPIO pins 4 (for +5V) and 6 (for ground) to the PowerBoost module. Plugging a suitable 5V power supply into the PowerBoost charger should now power the Raspberry Pi.
+
+4. Connect now the On/Off switch - you should now be able to switch power.
+
+5. Add now the wiring for the PAM8302 Audio Amplifier. You should now be able to output sound from the Raspberry Pi. Note: The audio/video socket is switched off by default if you use the HDMI output.
+
+<img src="/pics/spieljunge_000.jpg" height="300">
+
+6. It is now time to connect the display. Be sure to have to correct output on the Boost Step Up Module (between 6V and 7V). You should now be able to see the Pi's output.
+
+<img src="/pics/spieljunge_004.jpg" height="300">
+
+7. Finally, connect the Lithium Ion Battery Pack to the PowerBoost Charger.
+
+<img src="/pics/spieljunge_026.jpg" height="300">
+
 
 Software Installation
 ---------------------
