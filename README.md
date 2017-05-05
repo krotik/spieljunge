@@ -91,13 +91,13 @@ Use the Breadboard to fit the Tactile Switch Buttons under the printed buttons.
 
 <img src="/pics/spieljunge_017.jpg" height="300"> <img src="/pics/spieljunge_016.jpg" height="300">
 
-Again this is a lot of trial and error until it fits. The Tactile Switch Buttons are then connected to the with the GPIO ports on the PI (I soldered the wires on the Breadboard and used normal PC jumpers for the Pi's GPIO). Each Switch is connected to a GPIO port and ground.
+Again this is a lot of trial and error until it fits. The Tactile Switch Buttons are then connected to the GPIO ports on the PI (I soldered the wires on the Breadboard and used normal PC jumpers for the Pi's GPIO). Each Switch is connected to a GPIO port and ground.
 
 <img src="/pics/spieljunge_023.jpg" height="300"> <img src="/pics/spieljunge_024.jpg" height="300">
 
 ### Internal wiring
 
-The complete wiring should look like this (zoom in to see more detail):
+The complete wiring should look like this (click to expand):
 
 <a href="/pics/wiring.svg"><img src="/pics/wiring_thumbnail.jpg" height="300"></a>
 
@@ -118,7 +118,7 @@ PP26 = Right audio
 
 <img src="/pics/spieljunge_000.jpg" height="300">
 
-6. It is now time to connect the display. Be sure to have to correct output on the Boost Step Up Module (between 6V and 7V). You should now be able to see the Pi's output.
+6. It is now time to connect the display. Be sure to have the correct output on the Boost Step Up Module (between 6V and 7V). You should now be able to see the Pi's output.
 
 <img src="/pics/spieljunge_004.jpg" height="300">
 
