@@ -2,8 +2,7 @@ Spieljunge
 ==========
 Spieljunge is a hardware design modeling a retro handheld console with a Raspberry Pi in a custom 3D printed case.
 
-![Proper work place](/pics/spieljunge_028.jpg)
-![Proper work place](/pics/spieljunge_030.jpg)
+<img src="/pics/spieljunge_028.jpg" height="400"> <img src="/pics/spieljunge_030.jpg" height="400">
 
 Utilising the power of a Raspberry Pi 3 with Raspbian & RetroPie as operating system this handheld can emulate many different retro platforms.
 
@@ -12,7 +11,7 @@ Requirements
 ------------
 You need basic soldering skills and should not be afraid of fiddeling with small electronics. Proper tooling is key: a good multimeter with logic testing capabilities, pliers, screwdrivers, some helping hand stand ([example](https://www.amazon.co.uk/gp/product/B000MRFVXM)), solder iron & solder and PATIENCE!
 
-![Proper work place](/pics/spieljunge_001.jpg)
+<img src="/pics/spieljunge_001.jpg" height="400">
 
 Features
 --------
@@ -76,12 +75,12 @@ Construction
 
 ### 3D Printing the Case and Buttons
 The case for Spieljunge was printed using a Prusa3D MK2 printer with PLA filament. The modeling was done in Blender3D - 
-the source file of the model can be found <a href="">here</a>.
+the source file of the model can be found here: <a href="src/sj_model.blend">Model</a> and <a href="src/sj_buttons.blend">Buttons</a>.
 
-<img
+<img src="/pics/spieljunge_018.jpg" height="300"> <img src="/pics/spieljunge_019.jpg" height="300">
 
-The STL file containing the 3D model for the case can be found <a href="">here</a>. The printable gcode which was 
-used to print the case can be found <a href="">here</a> (note: this is specific to the used 3D printer). 
+The STL file containing the 3D model for the case can be found <a href="/stl">here</a>. The printable gcode which was 
+used to print the case can be found <a href="/gcode">here</a> (note: these are specific to the used 3D printer). 
 
 The STL files containing the 3D model for the buttons are: . The printable gcode files
 which were used to print the buttons are: 
@@ -91,19 +90,22 @@ which were used to print the buttons are:
 
 Software Installation
 ---------------------
-For the software of Spieljunge I started with a vanilla Raspbian "Lite" (https://www.raspberrypi.org/downloads/raspbian/). Use your favourite flash tool (e.g. rufus - https://rufus.akeo.ie/) to create a bootable SD card for your Pi.
+For the software of Spieljunge I started with a vanilla Raspbian "Lite" ([link](https://www.raspberrypi.org/downloads/raspbian/)). Use your favourite flash tool (e.g. [rufus](https://rufus.akeo.ie/)) to create a bootable SD card for your Pi.
 
 ### Converting a GPIO button press into a keyboard stroke
 
-One of the most daunting things on the software side of this project is to convert GPIO input into actual keystrokes which are understood by RetroPie and its emulators. A bit of background: The Linux kernel has a "subsystems" called evdev which makes raw input available in /dev/input/... Most games and emulators will include libraries which read directly from there when they parse input. In order for the GPIO buttons to work we want them to "emulate" a keyboard. There are several libraries available which do exactly that - for example: pikeyd (https://github.com/mmoller2k/pikeyd), WiringPi (https://projects.drogon.net/raspberry-pi/wiringpi/) or Adafruit-Retrogame (https://github.com/adafruit/Adafruit-Retrogame). Unfortunately, most of these libraries require quite a bit of setup. For Spieljunge I decided for a more simple solution: a python library and a script. 
+One of the most daunting things on the software side of this project is to convert GPIO input into actual keystrokes which are understood by RetroPie and its emulators. A bit of background: The Linux kernel has a "subsystems" called evdev which makes raw input available in /dev/input/... Most games and emulators will include libraries which read directly from there when they parse input. In order for the GPIO buttons to work we want them to "emulate" a keyboard. There are several libraries available which do exactly that - for example: [pikeyd](https://github.com/mmoller2k/pikeyd), [WiringPi](https://projects.drogon.net/raspberry-pi/wiringpi/) or [Adafruit-Retrogame](https://github.com/adafruit/Adafruit-Retrogame). Unfortunately, most of these libraries require quite a bit of setup. For Spieljunge I decided for a more simple solution: a python library and a script. 
 
-The python script should use a special linux kernel module called uinput which allows to "emulate" input devices from the user space. Since it is a standard Linux module it is well supported. There is a python library called Python-uinput (https://github.com/tuomasjjrasanen/python-uinput) which provides python bindings. Although it is available via "pip install", I decided to compile it from source since I want to apply a little patch. So here we go:
+The python script should use a special linux kernel module called uinput which allows to "emulate" input devices from the user space. Since it is a standard Linux module it is well supported. There is a python library called [Python-uinput](https://github.com/tuomasjjrasanen/python-uinput) which provides python bindings. Although it is available via "pip install", I decided to compile it from source since I want to apply a little patch. So here we go:
 
-- Make sure uinput is loaded on startup. Add the line "uinput" to your /etc/modules and reboot. You can check if uinput is loaded by running "lsmod".
+- Make sure uinput is loaded on startup. Add the line "uinput" to your /etc/modules and reboot. You can check if uinput is loaded by running:
+```
+lsmod
+```
 
-- Download the latest source code for Python-uinput from its github page (Clone or download -> Download ZIP) and extract it.
+- Download the latest source code for [Python-uinput](https://github.com/tuomasjjrasanen/python-uinput) from its github page (Clone or download -> Download ZIP) and extract it.
 
-- Optional: To emulate a keyboard more accurately you may want to activate key repeat for uinput. See this (https://www.raspberrypi.org/forums/viewtopic.php?t=45041&p=357808) thread for more info on this. To do this we need to patch Python-uinput - either apply the following patch:
+- Optional: To emulate a keyboard more accurately you may want to activate key repeat for uinput. See this [forum thread](https://www.raspberrypi.org/forums/viewtopic.php?t=45041&p=357808) for more information on this. To do this we need to patch Python-uinput. Either apply the following patch:
 ```
 diff --git a/libsuinput/src/suinput.c b/libsuinput/src/suinput.c
 index 8d5fb71..4fa643a 100644
