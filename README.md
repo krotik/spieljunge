@@ -82,28 +82,26 @@ the source file of the model can be found here: <a href="src/sj_model.blend">Mod
 The STL file containing the 3D model for the case can be found <a href="/stl">here</a>. The printable gcode which was 
 used to print the case can be found <a href="/gcode">here</a> (note: these are specific to the used 3D printer). 
 
-The STL files containing the 3D model for the buttons are: . The printable gcode files
-which were used to print the buttons are: 
-
 ### Internal wiring
 
+... TODO ...
 
 Software Installation
 ---------------------
-For the software of Spieljunge I started with a vanilla Raspbian "Lite" ([link](https://www.raspberrypi.org/downloads/raspbian/)). Use your favourite flash tool (e.g. [rufus](https://rufus.akeo.ie/)) to create a bootable SD card for your Pi.
+For the software of Spieljunge I started with a vanilla Raspbian "Lite" ([link](https://www.raspberrypi.org/downloads/raspbian/)). Use your favourite flash tool (for example [rufus](https://rufus.akeo.ie/)) to create a bootable SD card for your Pi.
 
 ### Converting a GPIO button press into a keyboard stroke
 
 One of the most daunting things on the software side of this project is to convert GPIO input into actual keystrokes which are understood by RetroPie and its emulators. A bit of background: The Linux kernel has a "subsystems" called evdev which makes raw input available in /dev/input/... Most games and emulators will include libraries which read directly from there when they parse input. In order for the GPIO buttons to work we want them to "emulate" a keyboard. There are several libraries available which do exactly that - for example: [pikeyd](https://github.com/mmoller2k/pikeyd), [WiringPi](https://projects.drogon.net/raspberry-pi/wiringpi/) or [Adafruit-Retrogame](https://github.com/adafruit/Adafruit-Retrogame). Unfortunately, most of these libraries require quite a bit of setup. For Spieljunge I decided for a more simple solution: a python library and a script. 
 
-The python script should use a special linux kernel module called uinput which allows to "emulate" input devices from the user space. Since it is a standard Linux module it is well supported. There is a python library called [Python-uinput](https://github.com/tuomasjjrasanen/python-uinput) which provides python bindings. Although it is available via "pip install", I decided to compile it from source since I want to apply a little patch. So here we go:
+The python script should use a special linux kernel module called uinput which allows to "emulate" input devices from the user space. Since it is a standard Linux module it is well supported. There is a python library called [Python-uinput](https://github.com/tuomasjjrasanen/python-uinput) which provides python bindings for uinput. Although it is available via "pip install", I decided to compile it from source since I want to apply a little patch. So here we go:
 
 - Make sure uinput is loaded on startup. Add the line "uinput" to your /etc/modules and reboot. You can check if uinput is loaded by running:
 ```
 lsmod
 ```
 
-- Download the latest source code for [Python-uinput](https://github.com/tuomasjjrasanen/python-uinput) from its github page (Clone or download -> Download ZIP) and extract it.
+- Download the latest source code for [Python-uinput](https://github.com/tuomasjjrasanen/python-uinput) from its Github page (Clone or download -> Download ZIP) and extract it.
 
 - Optional: To emulate a keyboard more accurately you may want to activate key repeat for uinput. See this [forum thread](https://www.raspberrypi.org/forums/viewtopic.php?t=45041&p=357808) for more information on this. To do this we need to patch Python-uinput. Either apply the following patch:
 ```
@@ -130,7 +128,7 @@ or directly edit the file python-uinput/libsuinput/src/suinput.c and add the plu
 python setup.py build
 python setup.py install
 ```
-Verify that python-uinput is installed by running "python" and in the interpreter run "import uinput" - if you don't get an exception back things should be ok.
+Verify that Python-uinput is installed by running "python" and in the interpreter run "import uinput" - if you don't get an exception back things should be ok.
 
 - In the moment many emulators won't be able to see python-uinput generated events as keyboard events. The solution to this is to add a udev rule. Create the file: /etc/udev/rules.d/10-spieljunge.rules with the following content:
 ```
@@ -213,6 +211,7 @@ while True:
 
 GPIO.cleanup()
 ```
+You will need to modify the script for your device. Uncomment the print line and run the script to see which button is associated with a particular GPIO number. Modify the "keys" dictionary accordingly.
 
 - After creating the script make sure it is run from the start. Add the following line to /etc/rc.local before the "exit 0" line:
 ```
@@ -221,7 +220,6 @@ nohup python /home/pi/gkeybrd.py &
 
 - After a reboot your button presses should be visible on the normal console.
 
-
 ### Installing RetroPie
 
-To install RetroPie I followed the "Manual Installation" guide (https://github.com/retropie/retropie-setup/wiki/Manual-Installation) with "Boot to emulationstation" (https://github.com/RetroPie/RetroPie-Setup/wiki/FAQ#how-do-i-boot-to-the-desktop-or-kodi) in combination with the "First Installation" guide (https://retropie.org.uk/docs/First-Installation/). Since the setup of the input controller is part of the installation I recommend to sort out the "GPIO as keyboard" first.
+To install RetroPie I followed the "Manual Installation" [guide](https://github.com/retropie/retropie-setup/wiki/Manual-Installation) with "Boot to emulationstation" [link](https://github.com/RetroPie/RetroPie-Setup/wiki/FAQ#how-do-i-boot-to-the-desktop-or-kodi) in combination with the "First Installation" [guide](https://retropie.org.uk/docs/First-Installation/). Since the setup of the input controller is part of the installation I recommend to sort out the "GPIO as keyboard" before installing RetroPie.
