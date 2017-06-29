@@ -22,7 +22,7 @@ Features
 - Using Raspbian with RetroPie as OS
 - Powerful hardware which provides smooth emulation
 - Raspberry Pi supports headphones, HDMI and Bluetooth
-
+- HDMI output so you can connect it to a TV or Projector
 
 Components
 ----------
@@ -36,6 +36,8 @@ Components
 - Lithium Ion Battery Pack - 3.7V 4400mAh (<a href="https://www.amazon.co.uk/gp/product/B00PKFJQ0U">Example</a>)
 
 - Solder Finished Prototype PCB for DIY 5x7cm Circuit Board Breadboard to place the buttons on (<a href="https://www.amazon.co.uk/gp/product/B00FXHXT80">Example</a>)
+
+EDIT (June/2017): I took my Spieljunge with me on my last holiday and have a few more thoughts regarding the battery: If you fly to your holiday destination you need to be careful which things you pack - especially when they are self-made. See for example the <a href="https://www.caa.co.uk/Passengers/Before-you-fly/Baggage/Items-that-are-allowed-in-baggage/">UK restrictions</a>. One major thing there is about lithium ion cell batteries. If you build your battery into the device you might have a hard time arguing that it does comply with all safety regulations at the security check. In my case I opted to just leave the battery pack out and instead I took a mobile power bank with me (<a href="https://www.amazon.co.uk/gp/product/B012V9H3WA/">link</a>). I had no problems with this approach since the power bank had all the required labels and my self-made Spieljunge had no active components inside. Also this power bank provided enough power for *days* of gaming without needing a recharge - I can highly recommend it!
 
 ### Buttons
 
